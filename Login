@@ -1,0 +1,58 @@
+from tkinter import *
+from tkinter import messagebox
+
+class Login:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Login - Face Recognition System")
+        self.root.geometry("400x300+500+200")
+
+        self.username_var = StringVar()
+        self.password_var = StringVar()
+
+        # Username Label and Entry
+        lbl_username = Label(root, text="Username:", font=("times new roman", 15, "bold"))
+        lbl_username.place(x=50, y=50)
+
+        entry_username = Entry(root, textvariable=self.username_var, font=("times new roman", 15))
+        entry_username.place(x=200, y=50)
+
+        # Password Label and Entry
+        lbl_password = Label(root, text="Password:", font=("times new roman", 15, "bold"))
+        lbl_password.place(x=50, y=100)
+
+        entry_password = Entry(root, textvariable=self.password_var, show="*", font=("times new roman", 15))
+        entry_password.place(x=200, y=100)
+
+        # Login Button
+        btn_login = Button(root, text="Login", command=self.login, font=("times new roman", 15, "bold"), bg="blue", fg="white")
+        btn_login.place(x=150, y=150)
+
+    def login(self):
+        # Add your actual login logic here
+        username = self.username_var.get()
+        password = self.password_var.get()
+
+        # Replace the condition with your actual login validation logic
+        if username == "admin" and password == "admin":
+            messagebox.showinfo("Success", "Login Successful!")
+            self.show_main_window()
+            self.root.destroy()
+        else:
+            messagebox.showerror("Error", "Invalid Username or Password")
+
+    def show_main_window(self):
+        # Implement the code to display the main window of Face_Recognition_System here
+        print("Logged in. Displaying main window...")
+
+        self.new_window = Toplevel(self.root)
+        self.app = Face_Recognition_System(self.new_window)
+
+class Face_Recognition_System:
+    def __init__(self, root):
+        self.root = root
+
+if __name__ == "__main__":
+    root = Tk()
+    obj = Login(root)
+    root.mainloop()
